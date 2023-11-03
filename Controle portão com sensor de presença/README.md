@@ -4,4 +4,4 @@ portão o mesmo para. Foi usado um led RGB para indicação visual do estado do 
 
 Foi usado o módulo de ponte H L298N para realizar o controle de rotação do motor do portão (motor DC de 5V). As peças mecânicas para funcionalidade do portão, e o próprio portão, foram impressas em uma impressora 3D.
 O projeto foi feito usando a linha de microcontroladores stm32f411. Importante resaltar o uso dos periféricos TIM, Input Capture (IC) e Output Compare (OC), para realizar o acionamento e leitura do sensor HC-SR04, e o 
-o uso da função de geração de PWM para o LED RGB.
+o uso da função de geração de PWM para controle da cor do LED RGB.
