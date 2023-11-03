@@ -1,21 +1,3 @@
-/* USER CODE BEGIN Header */
-/**
-  ******************************************************************************
-  * @file           : main.c
-  * @brief          : Main program body
-  ******************************************************************************
-  * @attention
-  *
-  * Copyright (c) 2023 STMicroelectronics.
-  * All rights reserved.
-  *
-  * This software is licensed under terms that can be found in the LICENSE file
-  * in the root directory of this software component.
-  * If no LICENSE file comes with this software, it is provided AS-IS.
-  *
-  ******************************************************************************
-  */
-/* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "adc.h"
@@ -25,43 +7,20 @@
 #include "usart.h"
 #include "gpio.h"
 
-/* Private includes ----------------------------------------------------------*/
-/* USER CODE BEGIN Includes */
-
-/* USER CODE END Includes */
-
-/* Private typedef -----------------------------------------------------------*/
-/* USER CODE BEGIN PTD */
-
-/* USER CODE END PTD */
-
-/* Private define ------------------------------------------------------------*/
-/* USER CODE BEGIN PD */
+/* Private defines -----------------------------------------------------------*/
 #define DOUBLE_SIZE 64
 #define SIGNAL_SIZE DOUBLE_SIZE/2
-/* USER CODE END PD */
-
-/* Private macro -------------------------------------------------------------*/
-/* USER CODE BEGIN PM */
-
-/* USER CODE END PM */
 
 /* Private variables ---------------------------------------------------------*/
-
-/* USER CODE BEGIN PV */
 volatile uint16_t vet_leitura[DOUBLE_SIZE];
- uint16_t sinal_1[SIGNAL_SIZE];
- uint16_t sinal_2[SIGNAL_SIZE];
- uint16_t sinal_mixado[SIGNAL_SIZE];
+uint16_t sinal_1[SIGNAL_SIZE];
+uint16_t sinal_2[SIGNAL_SIZE];
+uint16_t sinal_mixado[SIGNAL_SIZE];
 int aux_1 = 0;
 int aux_2 = 1;
-/* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
-/* USER CODE BEGIN PFP */
-
-/* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
@@ -88,25 +47,11 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc) {	//Callback DMA do ADC, 
   */
 int main(void)
 {
-  /* USER CODE BEGIN 1 */
-
-  /* USER CODE END 1 */
-
-  /* MCU Configuration--------------------------------------------------------*/
-
   /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
   HAL_Init();
-
-  /* USER CODE BEGIN Init */
-
-  /* USER CODE END Init */
-
+	
   /* Configure the system clock */
   SystemClock_Config();
-
-  /* USER CODE BEGIN SysInit */
-
-  /* USER CODE END SysInit */
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
@@ -116,7 +61,7 @@ int main(void)
   MX_DAC_Init();
   MX_TIM2_Init();
   /* USER CODE BEGIN 2 */
-  HAL_TIM_Base_Start(&htim2);
+  HAL_TIM_Base_Start(&htim2); //ativa tim 2
   HAL_ADC_Start_DMA(&hadc1, (uint16_t *)vet_leitura, DOUBLE_SIZE);   //ativa DMA ADC, escrevendo os dois canais no vet_leitura
   HAL_DAC_Start_DMA(&hdac, DAC_CHANNEL_1, (uint16_t *)sinal_mixado, SIGNAL_SIZE, DAC_ALIGN_12B_R); //ativa DMA DAC
   /* USER CODE END 2 */
